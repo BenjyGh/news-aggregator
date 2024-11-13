@@ -23,7 +23,7 @@ class ErrorFactory
 
     public function __construct(
         public \Throwable $exception,
-        public Request $request
+        public Request    $request
     )
     {
     }
@@ -39,10 +39,15 @@ class ErrorFactory
             return $this->$method($this->exception);
         }
 
+        // Check exception code to see if its valid HTTP response code
+        $statusCode = array_key_exists($this->exception->getCode(), Response::$statusTexts)
+            ? $this->exception->getCode()
+            : Response::HTTP_INTERNAL_SERVER_ERROR;
+
         return $this->respondError([
             'message' => $this->exception->getMessage(),
             'type' => $classShortName,
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        ], $statusCode);
     }
 
     private function handleValidationException(ValidationException $exception): JsonResponse

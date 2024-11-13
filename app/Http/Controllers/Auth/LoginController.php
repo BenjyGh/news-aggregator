@@ -16,9 +16,7 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request): JsonResponse
     {
-        $request->authenticate();
-
-        $user = User::where('email', $request->email)->first();
+        $user = $request->authenticate();
 
         $token = $user->createToken('api-token')->plainTextToken;
 
