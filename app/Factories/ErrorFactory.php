@@ -3,6 +3,7 @@
 namespace App\Factories;
 
 use App\Trait\ApiResponse;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -19,6 +20,7 @@ class ErrorFactory
      */
     public array $handlers = [
         ValidationException::class => 'handleValidationException',
+        AuthenticationException::class => 'handleAuthenticationException',
     ];
 
     public function __construct(
@@ -62,6 +64,12 @@ class ErrorFactory
                 ];
             }
 
-        return self::respondError($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        return $this->respondError($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    private function handleAuthenticationException(AuthenticationException $exception) {
+        return $this->respondError([
+            'message' => $exception->getMessage(),
+        ], Response::HTTP_UNAUTHORIZED);
     }
 }
