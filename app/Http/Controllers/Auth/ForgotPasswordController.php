@@ -30,8 +30,8 @@ class ForgotPasswordController extends Controller
             ]);
         }
 
-        return $this->respondSuccess([
-            'status' => __($status)
-        ]);
+        return $this->respondSuccess(
+            message: __($status)
+        );
     }
 }
