@@ -41,7 +41,23 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function assertResponseIsPaginated(Illuminate\Testing\TestResponse $response): void
 {
-    // ..
+    $response
+        ->assertOk()
+        ->assertJsonStructure([
+            'meta' => [
+                'current_page',
+                'from',
+                'path',
+                'per_page',
+                'to',
+            ],
+            'links' => [
+                'first',
+                'last',
+                'prev',
+                'next',
+            ],
+        ]);
 }

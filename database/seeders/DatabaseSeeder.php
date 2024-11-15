@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,5 +25,7 @@ class DatabaseSeeder extends Seeder
         // cant generate more than 10, because we have unique constraint on name,
         // and defined only 10 values in CategoryFactory
         Category::factory(10)->create();
+
+        Author::factory(10)->create();
     }
 }
