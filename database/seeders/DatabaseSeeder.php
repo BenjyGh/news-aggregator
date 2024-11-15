@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\NewsSource;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,5 +28,7 @@ class DatabaseSeeder extends Seeder
         Category::factory(10)->create();
 
         Author::factory(10)->create();
+
+        NewsSource::factory(10)->create();
     }
 }

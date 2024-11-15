@@ -12,3 +12,6 @@ Route::prefix('category')->as('category:')->group(base_path('routes/api/category
 
 // Author Routes
 Route::prefix('author')->as('author:')->group(base_path('routes/api/author.php'));
+
+// NewsSource Routes
+Route::prefix('news-source')->as('news-source:')->group(base_path('routes/api/news_source.php'));
