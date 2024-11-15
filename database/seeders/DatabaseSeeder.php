@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,5 +20,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
+
+        // cant generate more than 10, because we have unique constraint on name,
+        // and defined only 10 values in CategoryFactory
+        Category::factory(10)->create();
     }
 }
