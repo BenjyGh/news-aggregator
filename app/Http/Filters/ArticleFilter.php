@@ -86,17 +86,13 @@ class ArticleFilter extends QueryFilter
     /**
      * Filter the query by keyword for "title" and "content" field.
      *
-     * @param string $keywords comma separated keywords
+     * @param string $keywords
      * @return void
      */
     public function keyword(string $keywords): void
     {
-        $keywordsArray = explode(',', $keywords);
-
-        $searchQuery = implode(' ', array_map(fn($keyword) => '+' . trim($keyword), $keywordsArray));
-
         $this->builder->whereRaw(
-            "MATCH(title, content) AGAINST (? IN BOOLEAN MODE)", [$searchQuery]
+            "MATCH(title, content) AGAINST (? IN NATURAL LANGUAGE MODE)", [$keywords]
         );
     }
 }

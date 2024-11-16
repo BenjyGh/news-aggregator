@@ -11,8 +11,18 @@
 |
 */
 
+/*
+ * Here we have to use DatabaseMigrations instead of RefreshDatabase
+ * which is significantly slower because for each test it needs to
+ * migrate the whole database
+ *
+ * problem with RefreshDatabase is that we need to test our fulltext search,
+ * and fulltext search doesn't work inside transactions before commit.
+ *
+ * https://dev.mysql.com/doc/refman/8.4/en/innodb-fulltext-index.html#innodb-fulltext-index-transaction
+ */
 pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
     ->in('Feature');
 
 /*
