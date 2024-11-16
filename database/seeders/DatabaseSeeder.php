@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Article;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\NewsSource;
@@ -25,10 +26,16 @@ class DatabaseSeeder extends Seeder
 
         // cant generate more than 10, because we have unique constraint on name,
         // and defined only 10 values in CategoryFactory
-        Category::factory(10)->create();
+        $categories = Category::factory(10)->create();
 
-        Author::factory(10)->create();
+        $authors = Author::factory(10)->create();
 
-        NewsSource::factory(10)->create();
+        $newsSources = NewsSource::factory(10)->create();
+
+        Article::factory(10)
+            ->recycle($newsSources)
+            ->recycle($authors)
+            ->recycle($categories)
+            ->create();
     }
 }

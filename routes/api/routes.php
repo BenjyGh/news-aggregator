@@ -15,3 +15,6 @@ Route::prefix('author')->as('author:')->group(base_path('routes/api/author.php')
 
 // NewsSource Routes
 Route::prefix('news-source')->as('news-source:')->group(base_path('routes/api/news_source.php'));
+
+// Article Routes
+Route::prefix('article')->as('article')->group(base_path('routes/api/article.php'));
