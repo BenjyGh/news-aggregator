@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ErrorFactory
 {
@@ -21,6 +22,7 @@ class ErrorFactory
     public array $handlers = [
         ValidationException::class => 'handleValidationException',
         AuthenticationException::class => 'handleAuthenticationException',
+        NotFoundHttpException::class => 'handleNotFoundException'
     ];
 
     public function __construct(
@@ -67,9 +69,17 @@ class ErrorFactory
         return $this->respondError($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    private function handleAuthenticationException(AuthenticationException $exception) {
+    private function handleAuthenticationException(AuthenticationException $exception)
+    {
         return $this->respondError([
             'message' => $exception->getMessage(),
         ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    public function handleNotFoundException(NotFoundHttpException $exception)
+    {
+        return $this->respondError([
+            'message' => $exception->getMessage(),
+        ], Response::HTTP_NOT_FOUND);
     }
 }
