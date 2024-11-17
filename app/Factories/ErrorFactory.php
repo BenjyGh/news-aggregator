@@ -4,6 +4,7 @@ namespace App\Factories;
 
 use App\Trait\ApiResponse;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -22,7 +23,8 @@ class ErrorFactory
     public array $handlers = [
         ValidationException::class => 'handleValidationException',
         AuthenticationException::class => 'handleAuthenticationException',
-        NotFoundHttpException::class => 'handleNotFoundException'
+        NotFoundHttpException::class => 'handleNotFoundException',
+        ThrottleRequestsException::class => 'handleThrottleRequestsException'
     ];
 
     public function __construct(
@@ -69,17 +71,24 @@ class ErrorFactory
         return $this->respondError($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    private function handleAuthenticationException(AuthenticationException $exception)
+    private function handleAuthenticationException(AuthenticationException $exception): JsonResponse
     {
         return $this->respondError([
             'message' => $exception->getMessage(),
         ], Response::HTTP_UNAUTHORIZED);
     }
 
-    public function handleNotFoundException(NotFoundHttpException $exception)
+    public function handleNotFoundException(NotFoundHttpException $exception): JsonResponse
     {
         return $this->respondError([
             'message' => $exception->getMessage(),
         ], Response::HTTP_NOT_FOUND);
+    }
+
+    public function handleThrottleRequestsException(ThrottleRequestsException $exception): JsonResponse
+    {
+        return $this->respondError([
+            'message' => $exception->getMessage(),
+        ], Response::HTTP_TOO_MANY_REQUESTS);
     }
 }
