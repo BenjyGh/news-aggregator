@@ -53,9 +53,7 @@ class GuardianSource extends BaseNewsSource
 
         $articles = collect($response->json()['response']['results'] ?? []);
 
-        $articles = $articles->filter(
-            fn($article) => isset($article['fields']['byline']) && $article['fields']['byline']
-        );
+        $articles = $articles->filter(fn($article) => isset($article['fields']['byline']));
 
         return $articles
             ->map(fn($item) => $this->normalizer->normalize($item))

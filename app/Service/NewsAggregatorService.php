@@ -106,8 +106,7 @@ class NewsAggregatorService
             if ($article['category']) {
                 $category = Category::firstOrCreate(['name' => $article['category']]);
             } elseif ($article['category'] === null && $source->category_name) {
-                $categoryName = $source->category_name;
-                $category = Category::firstOrCreate(['name' => $categoryName]);
+                $category = Category::firstOrCreate(['name' => $source->category_name]);
             }
 
             // Create or update the article.
