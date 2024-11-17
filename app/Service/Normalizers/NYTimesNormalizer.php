@@ -18,15 +18,17 @@ class NYTimesNormalizer implements NewsNormalizerInterface
             'title' => $article['headline']['main'] ?? '',
             'content' => $article['lead_paragraph'] ?? '',
             'url' => $article['web_url'] ?? '',
-            'image_url' => $this->url . $article['multimedia'][0]['url'],
+            'image_url' => isset($article['multimedia'][0]['url'])
+                ? $this->url . $article['multimedia'][0]['url']
+                : '',
             'published_at' => $article['pub_date'] ?? null,
 
-            'author' => strtolower($article['byline']['original']),
+            'author' => strtolower($article['byline']['original'] ?? '') ?: null,
             'source' => [
                 'name' => 'new york times',
                 'url' => $this->url
             ],
-            'category' => strtolower($article['news_desk'])
+            'category' => strtolower($article['news_desk'] ?? '') ?: null
         ];
     }
 }
