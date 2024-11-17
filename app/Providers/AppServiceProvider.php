@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Service\APIs\GuardianSource;
+use App\Service\APIs\NewsAPISource;
+use App\Service\APIs\NYTimesSource;
+use App\Service\NewsAggregatorService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +16,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Initialize the NewsAggregatorService with our sources.
+        $this->app->singleton(NewsAggregatorService::class, fn() => new NewsAggregatorService([
+            new NYTimesSource(),
+            new GuardianSource(),
+            new NewsAPISource(),
+        ]));
     }
 
     /**

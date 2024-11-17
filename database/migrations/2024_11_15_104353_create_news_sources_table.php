@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('news_sources', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('url')->unique();
+            $table->string('url')->nullable()->unique();
 
             // NewsApi.org doesn't return category for each article, instead it returns source
             // and sources have category. for this challenge we have to store source category name,

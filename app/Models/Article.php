@@ -36,6 +36,10 @@ class Article extends Model
       'published_at',
     ];
 
+    protected $casts = [
+        'published_at' => 'datetime'
+    ];
+
     // scope
     public function scopeFilter(Builder $builder, QueryFilter $filter): Builder
     {
