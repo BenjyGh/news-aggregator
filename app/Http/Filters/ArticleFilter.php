@@ -29,26 +29,6 @@ class ArticleFilter extends QueryFilter
     ];
 
     /**
-     * Include requested relationships in the query builder if allowed.
-     *
-     * @param string $relations comma separated relationships
-     * @return void
-     */
-    public function include(string $relations): void
-    {
-        $queryList = explode(',', $relations);
-
-        $validQueryNames = array_filter(
-            $queryList,
-            fn($item) => array_key_exists($item, $this->allowedIncludes)
-        );
-
-        $validRelations = array_map(fn($relation) => $this->allowedIncludes[$relation], $validQueryNames);
-
-        $this->builder->with($validRelations);
-    }
-
-    /**
      * Filter the query by the starting date for the "published_at" field.
      *
      * @param string $date yyyy-mm-dd

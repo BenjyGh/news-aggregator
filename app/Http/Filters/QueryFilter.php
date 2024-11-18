@@ -4,6 +4,7 @@ namespace App\Http\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
@@ -67,6 +68,30 @@ abstract class QueryFilter
     }
 
     /**
+     * Include requested relationships in the query builder if allowed.
+     *
+     * @param string $relations comma separated relationships
+     * @return void
+     */
+    public function include(string $relations): void
+    {
+        $queryList = collect(explode(',', $relations));
+
+        // filter out the invalid params
+        $validQueryNames = $queryList->filter(fn($item) => Arr::exists($this->allowedIncludes, $item));
+
+        // map query param name to relation name
+        $validRelations = $validQueryNames->map(fn($relation) => $this->allowedIncludes[$relation]);
+
+        // load the relation with limit amount of 10
+        foreach ($validRelations as $relation) {
+            $this->builder->with([
+                $relation => fn($query) => $query->limit(10)
+            ]);
+        }
+    }
+
+    /**
      * get "filter[]" array from apply method and iterate through them
      * calling corresponding method if exist
      *
@@ -83,7 +108,6 @@ abstract class QueryFilter
                 $this->$key($value);
         }
     }
-
 
     /**
      * Apply sorting to the query based on specified attributes.
