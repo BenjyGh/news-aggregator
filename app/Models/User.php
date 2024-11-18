@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
@@ -55,5 +57,26 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token): void
     {
         Log::info("Password Reset Token: " . $token);
+    }
+
+    public function preferences(): HasMany
+    {
+        return $this->hasMany(UserPreference::class);
+    }
+
+    public function preferredCategories(): MorphToMany
+    {
+        return $this->morphedByMany(Category::class, 'preferable', 'user_preferences');
+    }
+
+    public function preferredAuthors(): MorphToMany
+    {
+        return $this->morphedByMany(Author::class, 'preferable', 'user_preferences');
+    }
+
+    public function preferredNewsSources(): MorphToMany
+    {
+        return $this
+            ->morphedByMany(NewsSource::class, 'preferable', 'user_preferences');
     }
 }
