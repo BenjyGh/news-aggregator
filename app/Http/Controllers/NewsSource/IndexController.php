@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\NewsSource;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\NewSourceFilter;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\NewsSourceResource;
@@ -19,8 +20,8 @@ class IndexController extends Controller
     /**
      * Handle an incoming category index request.
      */
-    public function __invoke() : AnonymousResourceCollection
+    public function __invoke(NewSourceFilter $filter) : AnonymousResourceCollection
     {
-        return NewsSourceResource::collection(NewsSource::simplePaginate());
+        return NewsSourceResource::collection(NewsSource::filter($filter)->simplePaginate());
     }
 }

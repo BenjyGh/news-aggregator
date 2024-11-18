@@ -23,6 +23,8 @@ class NewsSourceResource extends JsonResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'url' => $this->resource->url,
+
+            'articles' => ArticleResource::collection($this->whenLoaded('articles'))
         ];
     }
 }
