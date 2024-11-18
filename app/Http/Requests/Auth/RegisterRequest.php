@@ -5,6 +5,11 @@ namespace App\Http\Requests\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @bodyParam name string required The full name of the user. No-example
+ * @bodyParam email string required The email address of the user. No-example
+ * @bodyParam password string required The password for the account (minimum 8 characters). No-example
+ */
 class RegisterRequest extends FormRequest
 {
     public function authorize(): bool

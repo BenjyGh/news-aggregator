@@ -10,9 +10,14 @@ use App\Models\Article;
 class ShowController extends Controller
 {
     /**
-     * Handle an incoming article index request.
+     * Show Article
+     *
+     * This endpoint retrieves a detailed view of a specific article.
+     *
+     * @group Article
+     * @subgroup Article
      */
-    public function __invoke(Article $article, ArticleFilter $filter): ArticleResource
+    public function __invoke(Article $article): ArticleResource
     {
         return new ArticleResource($article->load(['category', 'newsSource', 'author']));
     }

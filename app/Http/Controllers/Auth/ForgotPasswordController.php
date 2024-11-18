@@ -11,9 +11,13 @@ use Illuminate\Validation\ValidationException;
 class ForgotPasswordController extends Controller
 {
     /**
-     * Handle an incoming forgot password request.
+     * Forgot Password
+     *
+     * This endpoint allows users to request a password reset link by providing their registered email address.
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @group Authentication
      */
     public function __invoke(ForgotPasswordRequest $request): JsonResponse
     {

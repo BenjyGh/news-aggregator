@@ -9,7 +9,12 @@ use Illuminate\Http\Response;
 class LogoutController extends Controller
 {
     /**
-     * Handle an incoming logout request.
+     * Logout
+     *
+     * This endpoint revokes the user's authentication token, effectively logging them out from the application.
+     *
+     * @authenticated
+     * @group Authentication
      */
     public function __invoke(): Response
     {

@@ -9,7 +9,13 @@ use App\Http\Resources\UserPreferencesResource;
 class UpdateController extends Controller
 {
     /**
-     * Handle an incoming user preferences update request.
+     * Update User Preferences.
+     *
+     * This endpoint allows an authenticated user to update their preferences.
+     * @group User
+     * @subgroup User Preferences
+     *
+     * @authenticated
      */
     public function __invoke(UserPreferencesRequest $request): UserPreferencesResource
     {

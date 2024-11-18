@@ -13,9 +13,13 @@ use Illuminate\Validation\ValidationException;
 class ResetPasswordController extends Controller
 {
     /**
-     * Handle an incoming reset password request.
+     * Reset password
+     *
+     * This endpoint allows a user to reset their password using a valid reset token sent to their email.
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @group Authentication
      */
     public function __invoke(ResetPasswordRequest $request): JsonResponse
     {

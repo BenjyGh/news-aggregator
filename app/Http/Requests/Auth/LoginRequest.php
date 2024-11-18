@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-
+/**
+ * @bodyParam email string required The email address of the user. No-example
+ * @bodyParam password string required The password for the account. No-example
+ */
 class LoginRequest extends FormRequest
 {
     public function authorize(): bool

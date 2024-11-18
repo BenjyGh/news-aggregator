@@ -8,7 +8,14 @@ use App\Http\Resources\UserPreferencesResource;
 class ShowController extends Controller
 {
     /**
-     * Handle an incoming user preferences show request.
+     * Get User Preferences
+     *
+     *  This endpoint retrieves the current preferences of the authenticated user.
+     *
+     * @group User
+     * @subgroup User Preferences
+     *
+     * @authenticated
      */
     public function __invoke(): UserPreferencesResource
     {

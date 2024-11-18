@@ -7,13 +7,20 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use Knuckles\Scribe\Attributes\Authenticated;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Group;
 
 class RegisterController extends Controller
 {
     /**
-     * Handle an incoming registration request.
+     * Register
+     *
+     * This endpoint allows a new user to create an account.
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @group Authentication
      */
     public function __invoke(RegisterRequest $request): JsonResponse
     {

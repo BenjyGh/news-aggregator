@@ -11,7 +11,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class NewsfeedController extends Controller
 {
     /**
-     * Handle an incoming newsfeed index request.
+     * Newsfeed
+     *
+     * This endpoint retrieves personalized newsfeed of the authenticated user.
+     *
+     * @group User
+     * @authenticated
      */
     public function __invoke(ArticleFilter $filter): AnonymousResourceCollection
     {

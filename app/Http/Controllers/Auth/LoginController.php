@@ -10,9 +10,13 @@ use Illuminate\Http\JsonResponse;
 class LoginController extends Controller
 {
     /**
-     * Handle an incoming login request.
+     * Login
+     *
+     * This endpoint authenticates a user and returns an access token.
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @group Authentication
      */
     public function __invoke(LoginRequest $request): JsonResponse
     {

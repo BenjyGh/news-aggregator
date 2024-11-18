@@ -4,6 +4,11 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @bodyParam news_sources int[] List of news source Ids the user prefers. No-example
+ * @bodyParam categories int[] List of category Ids the user prefers. No-example
+ * @bodyParam authors int[] List of author Ids the user prefers. No-example
+*/
 class UserPreferencesRequest extends FormRequest
 {
     public function authorize(): bool
