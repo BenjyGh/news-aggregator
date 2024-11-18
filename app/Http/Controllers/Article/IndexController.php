@@ -20,6 +20,7 @@ class IndexController extends Controller
      *
      * @queryParam include string Comma-separated list of relations to include. Example: source,author,category
      * @queryParam filter[category] string Comma-separated list of category ids. No-example
+     * @queryParam filter[source] string Comma-separated list of source ids. No-example
      * @queryParam filter[keyword] string Filter results based on a keyword search. No-example
      * @queryParam filter[publishedAtStart] Filter results by the start of the publication date range (yyyy-mm-dd format). No-example
      * @queryParam filter[publishedAtEnd] Filter results by the end of the publication date range (yyyy-mm-dd format). No-example

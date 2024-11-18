@@ -300,7 +300,7 @@ paths:
                           url: 'https://www.nytimes.com/2024/11/16/health/mpox-california.html'
                           image_url: 'https://www.nytimes.com/images/2024/11/16/multimedia/16mpox-hfkc/16mpox-hfkc-articleLarge.jpg'
                           published_at:
-                            human: '1 day ago'
+                            human: '2 days ago'
                             datetime: '2024-11-16 22:52:41'
                             string: '2024-11-16T22:52:41+00:00'
                             timestamp: 1731797561
@@ -393,7 +393,7 @@ paths:
                           url: 'https://www.nytimes.com/2024/11/16/us/melissa-lucio-texas-death-row-innocent.html'
                           image_url: 'https://www.nytimes.com/images/2024/11/16/multimedia/16nat-texas-lucio-jmwh/16nat-texas-lucio-jmwh-articleLarge.jpg'
                           published_at:
-                            human: '1 day ago'
+                            human: '2 days ago'
                             datetime: '2024-11-16 22:57:56'
                             string: '2024-11-16T22:57:56+00:00'
                             timestamp: 1731797876
@@ -694,7 +694,7 @@ paths:
                             url: 'https://www.nytimes.com/2024/11/16/health/mpox-california.html'
                             image_url: 'https://www.nytimes.com/images/2024/11/16/multimedia/16mpox-hfkc/16mpox-hfkc-articleLarge.jpg'
                             published_at:
-                              human: '1 day ago'
+                              human: '2 days ago'
                               datetime: '2024-11-16 22:52:41'
                               string: '2024-11-16T22:52:41+00:00'
                               timestamp: 1731797561
@@ -787,7 +787,7 @@ paths:
                             url: 'https://www.nytimes.com/2024/11/16/us/melissa-lucio-texas-death-row-innocent.html'
                             image_url: 'https://www.nytimes.com/images/2024/11/16/multimedia/16nat-texas-lucio-jmwh/16nat-texas-lucio-jmwh-articleLarge.jpg'
                             published_at:
-                              human: '1 day ago'
+                              human: '2 days ago'
                               datetime: '2024-11-16 22:57:56'
                               string: '2024-11-16T22:57:56+00:00'
                               timestamp: 1731797876
@@ -2299,6 +2299,17 @@ paths:
           schema:
             type: string
             description: 'Comma-separated list of category ids.'
+            example: null
+            nullable: false
+        -
+          in: query
+          name: 'filter[source]'
+          description: 'Comma-separated list of source ids.'
+          example: null
+          required: false
+          schema:
+            type: string
+            description: 'Comma-separated list of source ids.'
             example: null
             nullable: false
         -

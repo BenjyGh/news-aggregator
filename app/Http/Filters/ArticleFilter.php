@@ -64,6 +64,19 @@ class ArticleFilter extends QueryFilter
     }
 
     /**
+     * Filter the query by sources.
+     *
+     * @param string $value comma separated categories
+     * @return void
+     */
+    public function source(string $value): void
+    {
+        $categoryIds = explode(',', $value);
+
+        $this->builder->whereIn('news_source_id', $categoryIds);
+    }
+
+    /**
      * Filter the query by keyword for "title" and "content" field.
      *
      * @param string $keywords
