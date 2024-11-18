@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * @extends QueryFilter<Article>
  */
-class AuthorFilter extends QueryFilter
+class CategoryFilter extends QueryFilter
 {
     /**
      * The query builder instance for the Article model.

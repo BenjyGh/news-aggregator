@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\CategoryFilter;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
@@ -17,8 +18,8 @@ class IndexController extends Controller
     /**
      * Handle an incoming category index request.
      */
-    public function __invoke() : AnonymousResourceCollection
+    public function __invoke(CategoryFilter $filter) : AnonymousResourceCollection
     {
-        return CategoryResource::collection(Category::simplePaginate());
+        return CategoryResource::collection(Category::filter($filter)->simplePaginate());
     }
 }
