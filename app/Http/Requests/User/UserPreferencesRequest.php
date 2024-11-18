@@ -19,13 +19,13 @@ class UserPreferencesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'news_sources' => ['array'],
+            'news_sources' => ['present', 'array'],
             'news_sources.*' => ['integer', 'exists:news_sources,id'],
 
-            'categories' => ['array'],
+            'categories' => ['present', 'array'],
             'categories.*' => ['integer', 'exists:categories,id'],
 
-            'authors' => ['array'],
+            'authors' => ['present', 'array'],
             'authors.*' => ['integer', 'exists:authors,id'],
         ];
     }

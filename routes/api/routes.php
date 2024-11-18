@@ -35,4 +35,10 @@ Route::middleware(['throttle:api'])->group(function () {
         ->as('user-preference:')
         ->middleware('auth:sanctum')
         ->group(base_path('routes/api/user_preference.php'));
+
+    // User Routes
+    Route::prefix('user')
+        ->as('user:')
+        ->middleware('auth:sanctum')
+        ->group(base_path('routes/api/user.php'));
 });
