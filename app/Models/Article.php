@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Filters\QueryFilter;
-use Illuminate\Database\Eloquent\Builder;
+use App\Http\Filters\Trait\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +22,7 @@ use Illuminate\Support\Carbon;
 class Article extends Model
 {
     /** @use HasFactory<\Database\Factories\ArticleFactory> */
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
       'title',
@@ -39,12 +38,6 @@ class Article extends Model
     protected $casts = [
         'published_at' => 'datetime'
     ];
-
-    // scope
-    public function scopeFilter(Builder $builder, QueryFilter $filter): Builder
-    {
-        return $filter->apply($builder);
-    }
 
     // Relations
     public function newsSource(): BelongsTo
