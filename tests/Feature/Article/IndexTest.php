@@ -75,7 +75,7 @@ test('user can filter articles based on published_at date', function () {
 
     expect($articles)
         ->toHaveCount(5)
-        ->and($articles->pluck('published_at'))
+        ->and($articles->pluck('published_at.datetime'))
         ->each
         ->toBeBetween(Carbon::parse('2023-01-01'), Carbon::parse('2024-01-01'));
 });
