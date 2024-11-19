@@ -54,7 +54,7 @@ class NewsAPISource extends BaseNewsSource
 
         // Filter out incomplete articles with missing author or content
         $articles = $articles->filter(
-            fn($article) => $article['author'] !== null && $article['content'] !== null
+            fn($article) => $article['author'] && $article['content']
         );
 
         return $articles

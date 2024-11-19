@@ -76,7 +76,7 @@ This project is a **backend-only Laravel-based News Aggregator API** that provid
 
 5. Seed the database: migration is automatically done in the build step
     ```bash
-   php artisan db::seed
+   php artisan db:seed
 
 ## **News Aggregator**
 
@@ -84,7 +84,7 @@ This project is a **backend-only Laravel-based News Aggregator API** that provid
 
 - **Fetch News**:
     ```bash
-    php artisan news::fetch
+    php artisan news:fetch
 
 ### Scheduler
 - This command is scheduled to run every hour to fetch news.

@@ -39,7 +39,8 @@ class NYTimesSource extends BaseNewsSource
     /**
      * Fetch news articles from NYTimes.
      *
-     * This method fetch articles from NYTimes and maps them into a normalized format.
+     * This method fetch articles from NYTimes and filters out incomplete articles
+     *  and maps them into a normalized format.
      *
      * @return array The normalized list of articles.
      */
@@ -52,7 +53,7 @@ class NYTimesSource extends BaseNewsSource
 
         $articles = collect($response->json()['response']['docs'] ?? []);
 
-        $articles = $articles->filter(fn($article) => isset($article['byline']['original']));
+        $articles = $articles->filter(fn($article) => isset($article['byline']['original']) && $article['byline']['original']);
 
         return $articles
             ->map(fn($item) => $this->normalizer->normalize($item))
