@@ -7,6 +7,7 @@ use App\Http\Filters\ArticleFilter;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Cache;
 
 class NewsfeedController extends Controller
 {
@@ -26,16 +27,29 @@ class NewsfeedController extends Controller
         $preferredCategories = $user->preferredCategories()->pluck('categories.id');
         $preferredAuthors = $user->preferredAuthors()->pluck('authors.id');
 
-        $articles = Article::query()
-            ->when($preferredSources->isNotEmpty(),
-                fn($query) => $query->orWhereIn('news_source_id', $preferredSources))
-            ->when($preferredCategories->isNotEmpty(),
-                fn($query) => $query->orWhereIn('category_id', $preferredCategories))
-            ->when($preferredAuthors->isNotEmpty(),
-                fn($query) => $query->orWhereIn('author_id', $preferredAuthors))
-            ->orderBy('published_at', 'desc')
-            ->filter($filter);
 
-        return ArticleResource::collection($articles->simplePaginate());
+        $cacheKey = "user_{$user->id}_articles_"
+            . md5(
+                json_encode(request()->all())
+                . $preferredSources->implode(",")
+                . $preferredCategories->implode(",")
+                . $preferredAuthors->implode(",")
+            );
+
+        $articles = Cache::remember($cacheKey, now()->addMinutes(30),
+            function () use ($preferredSources, $preferredCategories, $preferredAuthors, $filter) {
+                return Article::query()
+                    ->when($preferredSources->isNotEmpty(),
+                        fn($query) => $query->orWhereIn('news_source_id', $preferredSources))
+                    ->when($preferredCategories->isNotEmpty(),
+                        fn($query) => $query->orWhereIn('category_id', $preferredCategories))
+                    ->when($preferredAuthors->isNotEmpty(),
+                        fn($query) => $query->orWhereIn('author_id', $preferredAuthors))
+                    ->orderBy('published_at', 'desc')
+                    ->filter($filter)
+                    ->simplePaginate();
+            });
+
+        return ArticleResource::collection($articles);
     }
 }
