@@ -52,6 +52,8 @@ class NYTimesSource extends BaseNewsSource
 
         $articles = collect($response->json()['response']['docs'] ?? []);
 
+        $articles = $articles->filter(fn($article) => isset($article['byline']['original']));
+
         return $articles
             ->map(fn($item) => $this->normalizer->normalize($item))
             ->toArray();
