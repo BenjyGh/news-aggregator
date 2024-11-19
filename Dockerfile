@@ -33,7 +33,7 @@ WORKDIR /var/www
 COPY . /var/www
 
 # Install Laravel dependencies
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install --optimize-autoloader
 
 # Permissions
 RUN chown -R www-data:www-data /var/www \

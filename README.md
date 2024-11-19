@@ -25,20 +25,15 @@ This project is a **backend-only Laravel-based News Aggregator API** that provid
 
 - **Aggregator Service**:
     - Fetch news from multiple sources and aggregate them into local database
-  
 - **User Authentication**:
     - Register, login, logout, forgot password, password reset
-
 - **Personalized Newsfeed**:
     - Dynamically filtered articles based on user preferences (sources, categories, authors).
-
 - **API-Driven**:
     - RESTful API endpoints for managing user preferences and fetching articles.
     - Fully documented API with Postman and OpenAPI formats and online API tester.
-
 - **Search and Filters**:
     - Comprehensive filtering and sorting system for articles, categories, authors and news sources.
-
 - **Dockerized Setup**:
     - Easy setup with Docker Compose for running Laravel, MySQL, Redis, and Scheduler.
 
@@ -52,8 +47,8 @@ This project is a **backend-only Laravel-based News Aggregator API** that provid
 ### Local Setup
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <project-folder>
+   git clone https://github.com/BenjyGh/news-aggregator.git
+   cd news-aggregator
 
 2. Copy `.env.example` file to `.env`. docker will create database based on this credentials
     ```env
